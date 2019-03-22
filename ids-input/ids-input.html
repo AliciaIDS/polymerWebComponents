@@ -1,0 +1,70 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="ids-input">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <input type="[[iType]]" name="[[iname]]" placeholder="[[iplace]]" on-change="validate" ><slot></slot></input>
+  </template>
+
+  <script>
+    /**
+     * `ids-input`
+     * My first input on polymer
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class IdsInput extends Polymer.Element {
+      static get is() { return 'ids-input'; }
+      static get properties() {
+        return {
+          iname: {
+            type: String,
+            value: 'ids-input',
+            reflectToAttribute: true,
+            notify: true
+          },
+          itype:{
+            type: String,
+            value:'text',
+            eflectToAttribute: true
+          },
+          iplace:{
+            type: String,
+            value: 'write on me',
+            eflectToAttribute: true
+          },
+          ivalue:{
+            type: String,
+            value: '',
+            eflectToAttribute: true
+          },
+        };
+      }
+
+      constructor() {
+        super();
+      }
+
+      ready(){
+        super.ready();
+      };
+    
+
+    validate(){
+
+        let element = (this.shadowRoot.querySelector(`ids-input`));
+        console.log(this.shadowRoot);
+       
+
+        
+      }
+}
+    window.customElements.define(IdsInput.is, IdsInput);
+  </script>
+</dom-module>

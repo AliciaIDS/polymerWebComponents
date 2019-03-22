@@ -7,7 +7,7 @@
         display: block;
       }
     </style>
-    <label for="[[iName]]">[[iPlace]]<input id="[[iId]]" type="[[iType]]" name="[[iName]]" placeholder="[[iPlace]]" on-change="validate" value="[[iValue]]"><slot></slot></input></label>
+    <label for="[[iName]]">[[iPlace]]<input id="[[iId]]" type="[[iType]]" name="[[iName]]" placeholder="[[iPlace]]" on-change="validate" value="[[iValue]]" pattern="[[iPattern]]"><slot></slot></input></label>
   </template>
 
   <script>
@@ -26,18 +26,16 @@
           iId: {
             type: String,
             value: 'ids-input',
-            reflectToAttribute: true,
-            notify: true
+            reflectToAttribute: true
           },
           iName: {
             type: String,
             value: 'ids-input',
-            reflectToAttribute: true,
-            notify: true
+            reflectToAttribute: true
           },
           iType:{
             type: String,
-            value:'text',
+            value:'',
             reflectToAttribute: true
           },
           iPlace:{
@@ -50,6 +48,11 @@
             value: '',
             reflectToAttribute: true
           },
+          iPattern:{
+            type: String,
+            value: '',
+            reflectToAttribute: true
+          }
         };
       }
 
@@ -63,11 +66,27 @@
     
 
     validate(){
+        let inputHtml = this.shadowRoot.querySelector(`label input`);
         let inputName = this.shadowRoot.querySelector(`label input`).name;
         let inputType = this.shadowRoot.querySelector(`label input`).type;
         let inputValue = this.shadowRoot.querySelector(`label input`).value;
-        console.log(inputName, inputValue, inputType);
+        if(inputValue!=''){
+          let valid = inputHtml.checkValidity();
+          if(valid){
+            console.log(valid);
+          }
+          else {
+            inputHtml.setCustomValidity('El campo' + inputName + 'no cumple con las especificaciones requeridas');
+          }
+        }
+
     }
+
+    
+
+  }
+
+
     window.customElements.define(IdsInput.is, IdsInput);
   </script>
 </dom-module>

@@ -7,7 +7,7 @@
         display: block;
       }
     </style>
-    <label for="[[iName]]">[[iPlace]]<input id="[[iId]]" type="[[iType]]" name="[[iName]]" placeholder="[[iPlace]]" on-change="validate" ><slot></slot></input></label>
+    <label for="[[iName]]">[[iPlace]]<input id="[[iId]]" type="[[iType]]" name="[[iName]]" placeholder="[[iPlace]]" on-change="validate" value="[[iValue]]"><slot></slot></input></label>
   </template>
 
   <script>
@@ -63,11 +63,11 @@
     
 
     validate(){
-        let element = this.shadowRoot.querySelector(`#${this.name}`);
-        console.log(element);
-        
-      }
-}
+        let inputName = this.shadowRoot.querySelector(`label input`).name;
+        let inputType = this.shadowRoot.querySelector(`label input`).type;
+        let inputValue = this.shadowRoot.querySelector(`label input`).value;
+        console.log(inputName, inputValue, inputType);
+    }
     window.customElements.define(IdsInput.is, IdsInput);
   </script>
 </dom-module>

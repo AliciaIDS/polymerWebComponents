@@ -7,7 +7,7 @@
         display: block;
       }
     </style>
-    <input type="[[iType]]" name="[[iname]]" placeholder="[[iplace]]" on-change="validate" ><slot></slot></input>
+    <label for="[[iName]]">[[iPlace]]<input id="[[iId]]" type="[[iType]]" name="[[iName]]" placeholder="[[iPlace]]" on-change="validate" ><slot></slot></input></label>
   </template>
 
   <script>
@@ -23,26 +23,32 @@
       static get is() { return 'ids-input'; }
       static get properties() {
         return {
-          iname: {
+          iId: {
             type: String,
             value: 'ids-input',
             reflectToAttribute: true,
             notify: true
           },
-          itype:{
+          iName: {
+            type: String,
+            value: 'ids-input',
+            reflectToAttribute: true,
+            notify: true
+          },
+          iType:{
             type: String,
             value:'text',
-            eflectToAttribute: true
+            reflectToAttribute: true
           },
-          iplace:{
+          iPlace:{
             type: String,
             value: 'write on me',
-            eflectToAttribute: true
+            reflectToAttribute: true
           },
-          ivalue:{
+          iValue:{
             type: String,
             value: '',
-            eflectToAttribute: true
+            reflectToAttribute: true
           },
         };
       }
@@ -57,11 +63,8 @@
     
 
     validate(){
-
-        let element = (this.shadowRoot.querySelector(`ids-input`));
-        console.log(this.shadowRoot);
-       
-
+        let element = this.shadowRoot.querySelector(`#${this.name}`);
+        console.log(element);
         
       }
 }
